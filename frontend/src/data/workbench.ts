@@ -1,4 +1,4 @@
-import type { FeatureItem, KpiItem, OperationRecord } from "../types";
+import type { FeatureItem, KpiItem, OperationRecord, RestockItem } from "../types";
 
 export const localFeatures: FeatureItem[] = [
   {
@@ -59,7 +59,7 @@ export const localKpis: KpiItem[] = [
   },
   {
     "label": "待处理",
-    "value": "8",
+    "value": "4",
     "trend": "需跟进",
     "tone": "neutral"
   }
@@ -105,5 +105,75 @@ export const operationRecords: OperationRecord[] = [
     "status": "可导出",
     "metric": "28 条",
     "priority": "中"
+  }
+];
+
+// 后端未联通时的本地样例，与 database/init.sql 的种子库存保持一致
+export const localRestocks: RestockItem[] = [
+  {
+    "storeName": "高新万达店",
+    "skuCode": "SKU-1001",
+    "skuName": "矿泉水550ml",
+    "currentStock": 8,
+    "safetyStock": 25,
+    "suggestedQty": 17,
+    "status": "warning",
+    "lastRestockQty": null,
+    "lastHandledDate": null
+  },
+  {
+    "storeName": "城东旗舰店",
+    "skuCode": "SKU-1001",
+    "skuName": "矿泉水550ml",
+    "currentStock": 18,
+    "safetyStock": 30,
+    "suggestedQty": 12,
+    "status": "warning",
+    "lastRestockQty": null,
+    "lastHandledDate": null
+  },
+  {
+    "storeName": "高新万达店",
+    "skuCode": "SKU-1003",
+    "skuName": "鲜牛奶950ml",
+    "currentStock": 5,
+    "safetyStock": 15,
+    "suggestedQty": 10,
+    "status": "warning",
+    "lastRestockQty": null,
+    "lastHandledDate": null
+  },
+  {
+    "storeName": "滨湖万象店",
+    "skuCode": "SKU-1004",
+    "skuName": "抽纸3包装",
+    "currentStock": 9,
+    "safetyStock": 12,
+    "suggestedQty": 3,
+    "status": "warning",
+    "lastRestockQty": null,
+    "lastHandledDate": null
+  },
+  {
+    "storeName": "城东旗舰店",
+    "skuCode": "SKU-1002",
+    "skuName": "全麦面包",
+    "currentStock": 40,
+    "safetyStock": 20,
+    "suggestedQty": 0,
+    "status": "normal",
+    "lastRestockQty": null,
+    "lastHandledDate": null
+  },
+  {
+    "storeName": "城东旗舰店",
+    "skuCode": "SKU-1005",
+    "skuName": "洗衣液2kg",
+    "currentStock": 22,
+    "safetyStock": 18,
+    "suggestedQty": 0,
+    "status": "normal",
+    "lastRestockQty": null,
+    "lastHandledDate": null
   }
 ];

@@ -15,3 +15,19 @@ model OperationRecord {
   metric     String
   createdAt  DateTime @default(now())
 }
+
+// 门店 SKU 库存登记：同一门店同一 SKU 可有多条登记（含补货回填），
+// 现存量按全部分录求和，安全库存取各登记中的非空阈值。
+model InventoryEntry {
+  id          Int       @id @default(autoincrement())
+  storeName   String    @map("store_name")
+  skuCode     String    @map("sku_code")
+  skuName     String    @map("sku_name")
+  quantity    Int
+  safetyStock Int?      @map("safety_stock")
+  entryType   String    @default("registration") @map("entry_type")
+  handledDate DateTime? @map("handled_date")
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  @@map("inventory_entries")
+}

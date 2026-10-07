@@ -22,6 +22,30 @@ export interface OperationRecord {
   priority: string;
 }
 
+export interface RestockItem {
+  storeName: string;
+  skuCode: string;
+  skuName: string;
+  currentStock: number;
+  safetyStock: number;
+  suggestedQty: number;
+  status: "warning" | "normal";
+  lastRestockQty: number | null;
+  lastHandledDate: string | null;
+}
+
+export interface RestockListResponse {
+  items: RestockItem[];
+  warningCount: number;
+}
+
+export interface CreateRestockPayload {
+  storeName: string;
+  skuCode: string;
+  quantity: number;
+  handledDate: string;
+}
+
 export interface OverviewResponse {
   appName: string;
   appCode: string;

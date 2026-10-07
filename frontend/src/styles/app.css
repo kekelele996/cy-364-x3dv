@@ -119,6 +119,12 @@ body {
   margin-top: 26px;
 }
 
+.panel-desc {
+  margin: 4px 0 18px;
+  color: color-mix(in srgb, #1f2417 68%, #7d8f2d 32%);
+  line-height: 1.7;
+}
+
 .plain-table {
   overflow: hidden;
   border: 1px solid color-mix(in srgb, #1f2417 12%, transparent);
