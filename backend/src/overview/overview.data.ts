@@ -14,8 +14,8 @@ export const overviewData = {
       "id": 2,
       "title": "库存实时同步与预警",
       "description": "各门店库存变动实时同步，设置安全库存阈值，低于阈值时自动触发补货预警通知店长。",
-      "status": "排期中",
-      "metric": "31 单"
+      "status": "已上线",
+      "metric": "待补货清单"
     },
     {
       "id": 3,

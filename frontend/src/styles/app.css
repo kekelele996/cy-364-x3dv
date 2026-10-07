@@ -151,6 +151,45 @@ body {
   font-weight: 700;
 }
 
+.restock-panel .restock-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.restock-panel h2 {
+  margin: 0 0 6px;
+}
+
+.restock-panel .restock-head p {
+  margin: 0;
+  color: color-mix(in srgb, #1f2417 65%, #7d8f2d 35%);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.sku-cell strong,
+.sku-cell small {
+  display: block;
+}
+
+.sku-cell small,
+.muted {
+  color: color-mix(in srgb, #1f2417 55%, transparent);
+}
+
+.level-low {
+  color: #b55239;
+  font-weight: 800;
+}
+
+.suggest-qty {
+  color: #b55239;
+  font-size: 16px;
+}
+
 @media (max-width: 860px) {
   .topbar {
     align-items: flex-start;

@@ -23,5 +23,4 @@ export class OverviewController {
   @Get("api/overview")
   apiOverview() {
     return this.overviewService.getOverview();
-  }
-}
+  }}

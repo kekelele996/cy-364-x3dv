@@ -4,9 +4,16 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json && tsc prisma/seed.ts --outDir dist --rootDir . --esModuleInterop --module commonjs --target ES2021 --moduleResolution node --skipLibCheck",
     "start": "node dist/main.js",
-    "dev": "ts-node src/main.ts"
+    "dev": "ts-node src/main.ts",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:seed": "ts-node prisma/seed.ts",
+    "postinstall": "prisma generate || echo \"prisma generate skipped (schema not present yet)\""
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.15",
@@ -16,6 +23,7 @@
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "@prisma/client": "^6.1.0",
+    "prisma": "^6.1.0",
     "class-validator": "^0.14.1",
     "class-transformer": "^0.5.1",
     "jsonwebtoken": "^9.0.2"
@@ -23,7 +31,6 @@
   "devDependencies": {
     "@types/node": "^22.10.5",
     "typescript": "^5.7.2",
-    "ts-node": "^10.9.2",
-    "prisma": "^6.1.0"
+    "ts-node": "^10.9.2"
   }
 }

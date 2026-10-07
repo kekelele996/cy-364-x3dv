@@ -7,11 +7,64 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model OperationRecord {
-  id         Int      @id @default(autoincrement())
-  moduleName String
-  ownerName  String
-  status     String
-  metric     String
-  createdAt  DateTime @default(now())
+/// 门店
+model Store {
+  id        Int                  @id @default(autoincrement())
+  code      String               @unique
+  name      String
+  createdAt DateTime             @default(now()) @map("created_at")
+  registrations StockRegistration[]
+  restockRecords RestockRecord[]
+
+  @@map("stores")
+}
+
+/// 总部维护的 SKU 主数据
+model Sku {
+  id        Int                  @id @default(autoincrement())
+  code      String               @unique
+  name      String
+  spec      String?
+  barcode   String?
+  category  String?
+  createdAt DateTime             @default(now()) @map("created_at")
+  registrations StockRegistration[]
+  restockRecords RestockRecord[]
+
+  @@map("skus")
+}
+
+/// 各门店 SKU 的库存登记。同一门店同一 SKU 可以有多条，
+/// 判定预警时先按 (store_id, sku_id) 聚合：现存量求和，
+/// 安全库存取各登记中的最大值；安全库存全部未填的不进入待补货清单。
+model StockRegistration {
+  id          Int       @id @default(autoincrement())
+  storeId     Int       @map("store_id")
+  skuId       Int       @map("sku_id")
+  onHand      Int       @map("on_hand")
+  /// 安全库存阈值，允许为空（未填则不纳入补货清单）
+  safetyStock Int?      @map("safety_stock")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  store       Store     @relation(fields: [storeId], references: [id])
+  sku         Sku       @relation(fields: [skuId], references: [id])
+
+  @@index([storeId, skuId])
+  @@map("stock_registrations")
+}
+
+/// 店长回填的补货处理记录
+model RestockRecord {
+  id             Int      @id @default(autoincrement())
+  storeId        Int      @map("store_id")
+  skuId           Int      @map("sku_id")
+  /// 本次实际补货数量
+  restockQuantity Int     @map("restock_quantity")
+  /// 店长回填的处理日期
+  handledAt      DateTime @map("handled_at")
+  createdAt      DateTime @default(now()) @map("created_at")
+  store          Store    @relation(fields: [storeId], references: [id])
+  sku            Sku      @relation(fields: [skuId], references: [id])
+
+  @@index([storeId, skuId])
+  @@map("restock_records")
 }
